@@ -2729,7 +2729,7 @@ out:
 int32_t
 glusterd_snapshot_mount(glusterd_brickinfo_t *brickinfo, char *brick_mount_path)
 {
-    char msg[NAME_MAX] = "";
+    char msg[4096] = "";
     char mnt_opts[1024] = "";
     char buff[PATH_MAX] = {0};
     int32_t ret = -1;
@@ -4120,6 +4120,7 @@ glusterd_snapshot_probe(char *brick_path, glusterd_brickinfo_t *brickinfo)
         &lvm_snap_ops,
         0,
     };
+    int i = 0;
     xlator_t *this = NULL;
 
     this = THIS;
@@ -4129,7 +4130,7 @@ glusterd_snapshot_probe(char *brick_path, glusterd_brickinfo_t *brickinfo)
 
     gf_log(this->name, GF_LOG_INFO, "Probing brick %s for snapshot support",
            brick_path);
-    for (int i = 0; glusterd_snap_backend[i]; i++) {
+    for (i = 0; glusterd_snap_backend[i]; i++) {
         if (glusterd_snap_backend[i]->probe(brick_path)) {
             gf_log(this->name, GF_LOG_INFO, "%s backend detected",
                    glusterd_snap_backend[i]->name);

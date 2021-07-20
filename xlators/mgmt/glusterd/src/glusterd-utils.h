@@ -112,7 +112,6 @@ struct glusterd_snap_ops {
                            char *brick_mount_path);
 };
 
-
 gf_boolean_t
 glusterd_mntopts_exists(const char *str, const char *opts);
 
